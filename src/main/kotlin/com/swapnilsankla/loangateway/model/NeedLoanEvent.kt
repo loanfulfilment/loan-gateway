@@ -1,3 +1,3 @@
 package com.swapnilsankla.loangateway.model
 
-data class NeedLoanEvent(val customerId: String)
+data class NeedLoanEvent(val customerId: String, val applicationNumber: String)

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class NeedLoanEventPublisher(@Autowired val kafkaTemplate: KafkaTemplate<String, String>,
                              @Autowired val objectMapper: ObjectMapper) {
-    fun publish(customerId: String) {
-        kafkaTemplate.send("needLoanEvent", objectMapper.writeValueAsString(NeedLoanEvent(customerId)))
+    fun publish(customerId: String, applicationNumber: String) {
+        kafkaTemplate.send("needLoanEvent", objectMapper.writeValueAsString(NeedLoanEvent(customerId, applicationNumber)))
     }
 }
