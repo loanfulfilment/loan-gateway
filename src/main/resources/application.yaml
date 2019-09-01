@@ -1,3 +1,10 @@
+application:
+  name: loan-gateway
+
+tracer:
+  host: ${TRACER_HOST:localhost}
+  port: ${TRACER_PORT:6831}
+
 spring:
   kafka:
     bootstrap-servers: ${KAFKA_URL:kafka:9092}
