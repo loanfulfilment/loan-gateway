@@ -27,12 +27,11 @@ group = "com.swapnilsankla"
 version = "0.0.1-SNAPSHOT"
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
 dependencies {
-    implementation('com.swapnilsankla:trace-starter:0.0.1-SNAPSHOT')
+    implementation files('libs/trace-starter.jar')
 
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('io.micrometer:micrometer-registry-prometheus')
