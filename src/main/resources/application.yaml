@@ -8,7 +8,10 @@ tracer:
 spring:
   kafka:
     bootstrap-servers: ${KAFKA_URL:kafka:9092}
-
+    producer:
+      properties:
+        interceptor:
+          classes: io.opentracing.contrib.kafka.TracingProducerInterceptor
 server:
   port: 8082
 
