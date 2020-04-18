@@ -21,11 +21,10 @@ jobs:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
 
-    steps:
-      - run: git clone https://github.com/loanfulfilment/trace-starter.git
-      - run: cd trace-starter && gradle test publishToMavenLocal 
-      
+    steps:      
       - checkout
+      - run: git clone https://github.com/loanfulfilment/trace-starter.git
+      - run: cd trace-starter && gradle test publishToMavenLocal && cd .. && rm -rf trace-starter
 
       # Download and cache dependencies
       - restore_cache:
