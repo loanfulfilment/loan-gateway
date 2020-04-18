@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - run: git clone https://github.com/loanfulfilment/trace-starter.git
-      - run: cd trace-starter && gradle test publishToMavenLocal && cd ..
+      - run: cd trace-starter && gradle test publishToMavenLocal 
       
       - checkout
 
