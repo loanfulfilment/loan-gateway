@@ -12,6 +12,9 @@ spring:
       properties:
         interceptor:
           classes: io.opentracing.contrib.kafka.TracingProducerInterceptor
+  data:
+    mongodb:
+      uri: ${MONGO_URL:mongodb://localhost:27017/loan-gateway}
 server:
   port: 8082
 
