@@ -43,7 +43,7 @@ class LoanGrantedEventListener(
             )
             val trace = traceIdExtractor.fromKafkaHeaders(headers)
             loanProcessedPublisher.publish(updatedLoanApplication, trace)
-            loanGatewayRepository.save(updatedLoanApplication)
+            loanGatewayRepository.save(updatedLoanApplication).subscribe()
         }.subscribe()
     }
 }

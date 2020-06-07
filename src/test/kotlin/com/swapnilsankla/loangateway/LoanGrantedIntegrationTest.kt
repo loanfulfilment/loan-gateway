@@ -32,7 +32,7 @@ class LoanGrantedIntegrationTest(
     @Test
     fun `should update DB when received loan approval event`() {
         loanGatewayRepository.deleteAll()
-        loanGatewayRepository.save(LoanApplication(customerId = "1", applicationNumber = "1234"))
+        loanGatewayRepository.save(LoanApplication(customerId = "1", applicationNumber = "1234")).subscribe()
 
         val loanGrantedEventString = """
             {
@@ -45,14 +45,13 @@ class LoanGrantedIntegrationTest(
                 "foreclosureCharges": 0.0,
                 "partPaymentCharges": 0.0
               },
-              "fraudStatus": "CLEAR",
-              "loanGranted": true
+              "fraudStatus": "CLEAR"
             }
         """.trimIndent()
         kafkaTemplate.send("loanGranted", loanGrantedEventString)
 
         val result = waitTill(5, false) {
-            loanGatewayRepository.findByApplicationNumberAndCustomerId("1234", "1").block()!!.offer != null
+            loanGatewayRepository.findByApplicationNumberAndCustomerId("1234", "1").block()?.offer != null
         }
 
         result shouldBe true
