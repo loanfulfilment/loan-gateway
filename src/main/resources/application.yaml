@@ -12,6 +12,13 @@ spring:
       properties:
         interceptor:
           classes: io.opentracing.contrib.kafka.TracingProducerInterceptor
+    consumer:
+      client-id: loanGrantedEventConsumer
+      group-id: loanGrantedEvent-loanGateway-consumer-group
+      auto-offset-reset: earliest
+      properties:
+        interceptor:
+          classes: io.opentracing.contrib.kafka.TracingConsumerInterceptor
   data:
     mongodb:
       uri: ${MONGO_URL:mongodb://localhost:27017/loan-gateway}
