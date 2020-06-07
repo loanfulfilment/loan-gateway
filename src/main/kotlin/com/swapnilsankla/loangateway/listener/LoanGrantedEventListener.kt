@@ -6,8 +6,6 @@ import com.swapnilsankla.loangateway.publisher.LoanProcessedPublisher
 import com.swapnilsankla.loangateway.repository.LoanApplication
 import com.swapnilsankla.loangateway.repository.LoanGatewayRepository
 import com.swapnilsankla.tracestarter.TraceIdExtractor
-import io.opentracing.Span
-import io.opentracing.Tracer
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.kafka.annotation.KafkaListener
@@ -19,8 +17,7 @@ class LoanGrantedEventListener(
     @Autowired val loanGatewayRepository: LoanGatewayRepository,
     @Autowired val objectMapper: ObjectMapper,
     @Autowired val traceIdExtractor: TraceIdExtractor,
-    @Autowired val loanProcessedPublisher: LoanProcessedPublisher,
-    @Autowired val tracer: Tracer
+    @Autowired val loanProcessedPublisher: LoanProcessedPublisher
 ) {
     private val logger = LoggerFactory.getLogger(this::class.simpleName)
 
@@ -29,8 +26,6 @@ class LoanGrantedEventListener(
         val loanApplication = objectMapper.readValue(loanGrantedEventString, LoanGrantedEvent::class.java)
         val logString = "loanGranted event received for customer ${loanApplication.customerId}"
         logger.info(logString)
-        val activeSpan: Span? = tracer.activeSpan()
-        activeSpan?.log(logString)
 
         loanGatewayRepository.findByApplicationNumberAndCustomerId(
             loanApplication.applicationNumber,
