@@ -3,7 +3,6 @@ package com.swapnilsankla.loangateway.service
 import com.swapnilsankla.loangateway.publisher.NeedLoanEventPublisher
 import com.swapnilsankla.loangateway.repository.LoanApplication
 import com.swapnilsankla.loangateway.repository.LoanGatewayRepository
-import io.opentracing.Tracer
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
